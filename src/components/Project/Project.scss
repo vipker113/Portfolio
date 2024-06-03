@@ -1,0 +1,59 @@
+.project-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    & .title {
+        margin: 6rem 0 2rem 0;
+
+        & h1 {
+            font-size: 4rem;
+            text-align: center;
+            letter-spacing: 0.5rem;
+            // text-transform: uppercase;
+            transition: color 1s, letter-spacing 1s, text-shadow 1s;
+
+            &:hover {
+                cursor: pointer;
+                color: #fff;
+                letter-spacing: 12px;
+                transition: 1s;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+            }
+        }
+    }
+
+    & .card-element {
+        display: flex;
+        flex-direction: column;
+        &:hover {
+            transition: 0.5s;
+            box-shadow: 1px 1px 20px #012290f7, 1px 1px 40px #0053b8f7;
+        }
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .project-container {
+        margin-top: 8vh;
+
+        & .title {
+            margin: 4rem 0 0;
+
+            & h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        & .card-container {
+            width: 100% !important;
+            & .ant-col {
+                margin-top: 2vh;
+                padding: 0 !important;
+            }
+        }
+    }
+}

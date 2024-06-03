@@ -1,0 +1,163 @@
+.contact-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    & .title {
+        margin: 6rem 0 2rem 0;
+        & h1 {
+            font-size: 4rem;
+            text-align: center;
+            letter-spacing: 0.5rem;
+            transition: color 1s, letter-spacing 1s, text-shadow 1s;
+            // text-transform: uppercase;
+            &:hover {
+                cursor: pointer;
+                color: #fff;
+                letter-spacing: 12px;
+                transition: 1s;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+            }
+        }
+    }
+
+    & .contact-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // background: linear-gradient(to right bottom, #ffdbe2, #e6eaff);
+        background-color: transparent;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        border: 1px solid #fff;
+        max-width: 72%;
+        margin: 0 auto;
+        color: #fff;
+        width: 100%;
+
+        & > div {
+            & > div {
+                border: 1px solid #fff;
+            }
+        }
+
+        & input::-webkit-input-placeholder {
+            color: #fff !important;
+        }
+
+        & input,
+        fieldset,
+        legend,
+        textarea,
+        label {
+            color: #fff !important;
+
+            &::-webkit-input-placeholder {
+                color: #fff;
+            }
+            &:focus {
+            }
+        }
+
+        & .email-company {
+            width: 100%;
+            display: flex;
+            gap: 20px;
+
+            & > div {
+                width: 50%;
+            }
+        }
+
+        & .send-btn {
+            width: 40%;
+            border: none;
+            outline: none;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+            background: linear-gradient(to right, #ff512f, #f09819);
+
+            &:before {
+                content: '';
+                background: linear-gradient(
+                    45deg,
+                    #ff0000,
+                    #ff7300,
+                    #fffb00,
+                    #48ff00,
+                    #00ffd5,
+                    #002bff,
+                    #7a00ff,
+                    #ff00c8,
+                    #ff0000
+                );
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                border-radius: 10px;
+            }
+
+            &:active:after {
+                background: transparent;
+            }
+
+            &:active {
+                background-color: #000;
+            }
+
+            &:hover:before {
+                opacity: 1;
+            }
+
+            &:after {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% {
+                    background-position: 0 0;
+                }
+                50% {
+                    background-position: 400% 0;
+                }
+                100% {
+                    background-position: 0 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .contact-container {
+        & .title {
+            & h1 {
+                font-size: 2.5rem;
+            }
+        }
+        & .contact-form {
+            max-width: 90%;
+        }
+    }
+}

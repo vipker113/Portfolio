@@ -1,0 +1,177 @@
+@use 'sass:math';
+@import '../../vars.css';
+
+$l: sqrt(2) * 2px;
+
+@mixin border-ring($c, $b, $g: $b) {
+    $n: length($c);
+    $r: 0.5 * $b;
+    $ba: math.div(360deg, $n);
+    $sl: ();
+    $gl: ();
+
+    @for $i from 1 through $n {
+        $ca: $i * $ba;
+        $sl: $sl, nth($c, $i) 0% $ca;
+        $ca: $ca - 90deg;
+        $x: calc(50% + (50% - #{$r}) * #{cos($ca)});
+        $y: calc(50% + (50% - #{$r}) * #{sin($ca)});
+        $gl: $gl, radial-gradient(circle at $x $y, nth($c, $i) calc(#{$r} - 1px), transparent $r);
+    }
+
+    border: solid $b transparent;
+    padding: $g;
+    border-radius: 50%;
+    background: $gl, conic-gradient($sl);
+    background-origin: border-box;
+    --mask: radial-gradient(
+        closest-side,
+        red calc(100% - #{$b} - #{$g} - 1px),
+        transparent calc(100% - #{$b} - #{$g}) calc(100% - #{$b}),
+        red calc(100% - #{$b} + 1px) calc(100% - 1px),
+        transparent
+    );
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+
+.overview-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 100vh;
+
+    & .content {
+        width: 68%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: var(--color-text);
+        z-index: 1;
+
+        & .title {
+            font-size: 6rem;
+            font-weight: 900;
+            margin: 4vh 0px;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(to right, rgb(56, 252, 197), rgb(255, 168, 183));
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            // font-style: italic;
+        }
+        & .description {
+            font-size: 26px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-bottom: 30px;
+        }
+    }
+
+    & .avt {
+        width: 32%;
+        display: flex;
+        justify-content: center;
+
+        & .avatarImg {
+            width: 100%;
+            border-radius: 50%;
+            place-self: center;
+            width: Min(20em, 90vw);
+            @include border-ring(#f03355 #514b82 #ffa516 #25b09b, 1.25em, 0.75em);
+            z-index: 1;
+
+            animation-name: floating;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translate(0, 0px);
+            }
+            50% {
+                transform: translate(0, 20px);
+            }
+            100% {
+                transform: translate(0, -0px);
+            }
+        }
+    }
+
+    & .contactBtn {
+        text-decoration: none;
+        background: linear-gradient(to bottom right, rgb(235, 73, 235), rgb(255, 168, 183));
+        color: var(--color-text);
+        border-radius: 100px;
+        font-size: 24px;
+        margin-top: 4vh;
+        font-weight: 600;
+        padding: 17px 36px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    & .topBlur {
+        position: absolute;
+        width: 50vw;
+        height: 50vw;
+        min-width: 350px;
+        min-width: 250px;
+        top: -228px;
+        left: -10vw;
+        border-radius: 764px;
+        background: rgba(74, 161, 211, 0.785);
+        filter: blur(100px);
+        z-index: 0;
+    }
+}
+
+// Responsive
+
+@media screen and (max-width: 830px) {
+    .overview-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+
+        & .content {
+            width: 100%;
+            align-items: center;
+            /* text-align: center; */
+
+            & .title {
+                width: 100%;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            & .description {
+                font-size: 18px;
+                font-family: var(--font-roboto);
+                margin-bottom: 20px;
+                /* text-align: center; */
+            }
+        }
+
+        & .contactBtn {
+            text-decoration: none;
+            background: linear-gradient(to bottom right, rgb(235, 73, 235), rgb(255, 168, 183));
+            color: var(--color-text);
+            border-radius: 100px;
+            font-size: 16px;
+            margin-top: 4vh;
+            font-weight: 600;
+            padding: 12px 28px;
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        & .avt {
+            width: 80%;
+            & .avatarImg {
+                width: 70%;
+            }
+        }
+    }
+}
