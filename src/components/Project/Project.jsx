@@ -23,7 +23,7 @@ const container = (delay) => ({
 
 const videos = [
     {
-        videoSrc: '/src/assets/projects/project1.mp4',
+        videoSrc: getImageUrl('projects/project1.mp4'),
         imgSrc: getImageUrl('projects/thumbnail1.png'),
         title: 'Đồ án hệ thống quản lý trường Đại học Công nghiệp TP HCM',
         description:
@@ -43,7 +43,7 @@ const videos = [
         ],
     },
     {
-        videoSrc: '/src/assets/projects/project2.mp4',
+        videoSrc: getImageUrl('projects/project2.mp4'),
         imgSrc: getImageUrl('projects/thumbnail2.png'),
         title: 'Youtube Clone',
         description:
